@@ -2,14 +2,14 @@ pipeline {
 	agent any
 	stages {
 
-		stage('Create K8s Cluster') {
+		stage('Create k8s Cluster') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'semo') {
 					sh '''
 						eksctl create cluster \
-						--name capstonecluster \
+						--name capstoneproj \
 						--version 1.14 \
-						--nodegroup-name capstoneproj \
+						--nodegroup-name standard-workers \
 						--node-type t2.small \
 						--nodes 2 \
 						--nodes-min 1 \
@@ -24,9 +24,7 @@ pipeline {
 			}
 		}
 
-		
-
-		stage('Create Conf File') {
+		stage('Create Configration File') {
 			steps {
 				withAWS(region:'us-east-1', credentials:'semo') {
 					sh '''
@@ -35,6 +33,6 @@ pipeline {
 				}
 			}
 		}
-
 	}
 }
+
