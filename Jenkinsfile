@@ -13,12 +13,10 @@ pipeline {
 
     stage('Create Configration File') {
       steps {
-        withAWS(region: 'us-east-1', credentials: 'ecr_credentials') {
-          sh '''
+        withAWS(region: 'us-east-1', credentials: 'semo')
+        sh '''
 						aws eks --region us-east-1 update-kubeconfig --name capstoneproj
 					'''
-        }
-
       }
     }
 
